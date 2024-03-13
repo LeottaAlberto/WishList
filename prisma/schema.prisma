@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = "mongodb+srv://leottaalberto43:2CwD4BX6BtdGEeXN@pctodb.ijdpldo.mongodb.net/pcto_wish_db"
 }
 
 model User {
@@ -32,4 +32,6 @@ model Gift{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   user String
   category String
+  priority String
+  description String
 }
