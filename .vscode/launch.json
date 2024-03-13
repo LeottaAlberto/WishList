@@ -17,6 +17,24 @@
             ],
             "runtimeVersion": "20.11.1",
             "runtimeArgs": ["-r","ts-node/register","./main.ts"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "login",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\login.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "runtimeVersion": "20.11.1",
+            "runtimeArgs": ["-r","ts-node/register"],
+            "env": {
+                "DATABASE_URL":""
+            }
         }
+        
     ]
 }

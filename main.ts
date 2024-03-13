@@ -6,9 +6,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 });
 
-
 app.use(express.json())
-
 
 // async per le le funzioni asincrone e per fare le richieste al DB
 app.post('/', async (req, res) => {
@@ -16,7 +14,6 @@ app.post('/', async (req, res) => {
     res.send("");
 
 });
-
 
 app.listen(PORT, "0.0.0.0", ()=>{
     console.log('Server in ascolto sulla porta: ' + PORT);
