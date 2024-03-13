@@ -21,3 +21,15 @@ model User {
   dateBirth String
   gender String 
 }
+
+model Category{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  name String
+}
+
+model Gift{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  category String
+}
