@@ -7,6 +7,8 @@ async function test() {
             username: 'Pasticcio',
             password: '123prova',
             email: 'pasticcio@ciao.it',
+            dateBirth: new Date(),
+            gender:"male"
         }
     });
     console.log(ciao);
