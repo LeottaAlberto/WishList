@@ -28,16 +28,17 @@ async function test() {
  * @param priority 
  * @param description 
  */
-async function createGift(user: string, category: string, priority: string, description: string) {
+async function createGift(user: string, name: string, category: string, priority: string, description: string) {
     const newGift = await Prisma.gift.create({
         data: {
             user: user,
+            name: name,
             category: category,
             priority: priority,
             description: description,
         }
     });
-    console.log(newGift);
+    console.log("Gift Created Succesflully: " + newGift);
     checkGift(newGift.id);
 }
 
@@ -48,31 +49,51 @@ async function checkGift(id: string) {
         }
     });
     if(gift !== null) {
-        console.log("regalo esistente");
-        deleteGift(gift.id);
+        console.log("Gift Exist");
+        // deleteGift(gift.id);
     }
-    else console.log("regalo non esistente");
+    else console.log("Gift doesn't Exist");
     
 }
 
-async function deleteGift(id: string) {
-    const deleteGift = await Prisma.gift.delete({
-        where: {
-            id: id,
+// async function deleteGift(id: string) {
+//     modGift(id, 'oro', '2', '50', 'Tutto quel che luccia e\' ORO'); 
+//     // const deleteGift = await Prisma.gift.delete({
+//     //     where: {
+//     //         id: id,
+//     //     },
+//     // });
+//     // console.log(deleteGift);  
+// }
+
+export async function modGift(id: string, gift: {name: string, category: string, priority: string, description: string}) {
+    const mod = await Prisma.gift.update({
+
+        where:{
+            id: id
         },
+        data:gift
     });
+    
+    console.log(mod);
+    return
 }
 
-// createGift('65f1bacc3037064e96f5bbcf', '1', '100', 'regalo bellissimo che vorrei avere sempre con me').catch((err) => {
-//     console.error('Error: ', err);
-//     process.exit(1);
-// }).finally(async ()=>{
-//     await Prisma.$disconnect();
-// });
-deleteGift('65f1bacc3037064e96f5bbcf').catch((err) => {
-    console.error('Error: ', err);
-    process.exit(1);
-}).finally(async ()=>{
-    await Prisma.$disconnect();
+Prisma.$connect().then(connOk=>{
+    createGift('65f1bacc3037064e96f5bbcf', 'ORO','2', '50', 'Non e\' tutto oro quel che luccica').catch((err) => {
+        console.error('Error: ', err);
+        process.exit(1);
+    }).finally(async ()=>{
+        await Prisma.$disconnect();
+    });
+    // deleteGift('65f1bacc3037064e96f5bbcf').catch((err) => {
+    //     console.error('Error: ', err);
+    //     process.exit(1);
+    // }).finally(async ()=>{
+    //     await Prisma.$disconnect();
+    // }); 
+}).catch(err => {
+    console.error(err);
+    
 });
 

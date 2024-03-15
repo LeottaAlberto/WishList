@@ -30,6 +30,7 @@ model Category{
 
 model Gift{
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
   user String
   category String
   priority String
