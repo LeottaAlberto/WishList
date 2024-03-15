@@ -24,11 +24,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Login",
+            "name": "dbDebug",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\login.ts",
+            "program": "${workspaceFolder}\\dbDebugger.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],

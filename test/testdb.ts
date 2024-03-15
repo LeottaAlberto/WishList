@@ -12,7 +12,6 @@ async function test() {
         }
     });
     console.log(ciao);
-    
 }
 
 test().catch((err) => {
