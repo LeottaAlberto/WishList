@@ -48,7 +48,7 @@ export async function register(user:PrismaSchema.UserCreateArgs["data"]) {
         data: user
     });
 
-    const token = jwt.sign({ _id: newUser.id }, CONST_VALUES.jwt_secret);
+    const token = jwt.sign({ _id: newUser.id }, CONST_VALUES.jwt_secret,{expiresIn:'365d'});
     return token
 }
 
