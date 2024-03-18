@@ -1,6 +1,4 @@
 import express from 'express';
-import {modGift} from './test/testdb'
-import * as gift from './lib/gift'
 import { giftRouter } from './routers/gift';
 import { categoryRouter } from './routers/category';
 const app = express();
@@ -15,19 +13,19 @@ app.use(express.json())
 
 
 // async per le le funzioni asincrone e per fare le richieste al DB
-app.post('/', async (req, res) => {
-    const body=req.body
-    res.send("");
+// app.post('/', async (req, res) => {
+//     const body=req.body
+//     res.send("");
 
-});
+// });
 
-async function verifyUser(req:any,res:express.Response,next:express.NextFunction){
-    req.user="ciao"
-    next()
-}
+// async function verifyUser(req:any,res:express.Response,next:express.NextFunction){
+//     req.user="ciao"
+//     next()
+// }
 
 // validate request
-app.use(verifyUser)
+// app.use(verifyUser)
 // add to request the user document from db
 
 app.use('/gift',giftRouter);

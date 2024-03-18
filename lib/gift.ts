@@ -1,25 +1,33 @@
 import { Prisma } from "../src/db";
 
 
-export async function createGift(gift: {user: string, name: string, category: string, priority: string, description: string}){
-    const newGift = await Prisma.gift.create({
-        data: gift
-    });
-    console.log("Gift Created Succesflully!");
-    return newGift.id;
+export async function createGift(gift: {name: string, user: string, category: string, priority: string, description: string}){
+    try {
+        const newGift = await Prisma.gift.create({
+            data: gift
+        });
+        return newGift.id;
+    } catch (error) {
+        console.log(new Error('Couldn\'tcreate a gift: '), error);
+    }
+    console.log("Gift Created Succesfully!");
 }
 
-export async function modGift(id: string, gift: {name: string, category: string, priority: string, description: string}) {
-    const mod = await Prisma.gift.update({
-
-        where:{
-            id: id
-        },
-        data:gift
-    });
+export async function modGift(userId: string, giftId:string, gift: {name?: string, category?: string, priority?: string, description?: string}) {
+    try {
+        const mod = await Prisma.gift.update({
     
-    console.log(mod);
-    return mod.id;
+            where:{
+                id: giftId,
+                user: userId
+            },
+            data:gift
+        });
+        console.log("Gift Modified Succesfully");
+        return mod.id;
+    } catch (error) {   
+        console.log(new Error('Couldn\'tcreate a gift: '), error);
+    }
 }
 
 /**
@@ -50,6 +58,6 @@ export async function deleteGift(id: string) {
         },
     });
     console.log('Delete Succesfully');  
-    return deleteGift.id;
+    // return deleteGift.id;
 }
     
