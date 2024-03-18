@@ -13,7 +13,6 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-
 app.use('/auth/',authRouter)
 
 function verifyUser(req:CustomRequest,res:express.Response,next:express.NextFunction) {
@@ -27,8 +26,6 @@ function verifyUser(req:CustomRequest,res:express.Response,next:express.NextFunc
 
   next()
 }
-
-
 
 Prisma.$connect()
   .then((ok) => {

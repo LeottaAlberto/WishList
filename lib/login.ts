@@ -16,7 +16,7 @@ export async function login(user:{email: string, password: string}) {
     return token
 }
 
-export async function register(user:{email: string, username:string, password:string, dateBirth:Date, gender:string}) {
+export async function register(user:PrismaSchema.UserCreateArgs["data"]) {
     user.dateBirth=new Date(user.dateBirth)
     
     const checkUser = await Prisma.user.findFirst({

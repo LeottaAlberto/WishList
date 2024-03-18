@@ -1,6 +1,6 @@
 
 import {Router} from 'express'
-import { login, register } from '../lib/login'
+import { editUser, login, register } from '../lib/login'
 
 const authRouter= Router()
 
@@ -22,6 +22,19 @@ authRouter.post("/register", async (req, res) => {
     const body = req.body;
     try {
       const token= await register(body)
+      res.json(token);
+    } catch (error) {
+      res.status(413).send('wrong authorization')
+    }
+    console.log("User created succesfully");
+    
+  });
+
+  authRouter.post("/edit/:id", async (req, res) => {
+    const body = req.body;
+    const id = req.params.id;
+    try {
+      const token= await editUser(id,body)
       res.json(token);
     } catch (error) {
       res.status(413).send('wrong authorization')
