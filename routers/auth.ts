@@ -4,7 +4,7 @@ import { editUser, login, register } from '../lib/login'
 
 const authRouter= Router()
 
-//curl -X POST 'http://localhost:3000/auth/login' -H 'Content-Type: Application/json' -d '{"email":"pasticcio@ciao.it", "password": "123prova"}'
+//curl -X POST 'http://localhost:3000/auth/login' -H 'Content-Type: Application/json' -d '{"email":"luigi@gmail.com", "password": "123prova"}'
 authRouter.post("/login", async(req,res)=>{
     const body=req.body
     try {
