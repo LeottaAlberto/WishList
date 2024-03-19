@@ -20,8 +20,8 @@ giftRouter.patch('/:giftId', async (req: any, res) => {
 
 // curl -X POST 'http://localhost:3000/gift/create' -d '{"name":"computer", "user":"65f85e00f8908a74db0dda70", "category":"COMPRALO ORA", "priority":"100000", "description":"un nuovo regalo per il mio bel natale"}' -H "Content-Type: application/json"
 giftRouter.post('/', async (req: any, res) => {
-    const body = req.body;
     try {
+        const body = req.body;
         const newGift = await giftLib.createGift(body);
         res.json({ ok: true, id: newGift });
     } catch (error) {

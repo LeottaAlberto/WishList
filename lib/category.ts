@@ -1,7 +1,7 @@
 import { Prisma } from "../src/db";
 
 
-export async function createCategory(category: {user: string, name: string, category: string, priority: string, description: string}){
+export async function createCategory(category: {user: string, name: string}){
     const newCategory = await Prisma.category.create({
         data: category
     });
@@ -9,11 +9,12 @@ export async function createCategory(category: {user: string, name: string, cate
     return newCategory.id;
 }
 
-export async function modCategory(id: string, category: {name: string, category: string, priority: string, description: string}) {
+export async function modCategory(userId: string, categoryId: string, category:{user?: string, name?: string}) {
     const mod = await Prisma.category.update({
 
         where:{
-            id: id
+            id: categoryId,
+            user: userId
         },
         data:category
     });
