@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken"
 import { CustomRequest } from "./interfaces";
 import { CONST_VALUES } from "./config";
 import userRouter from "./routers/User";
-
+import { giftRouter } from './routers/gift';
+import { categoryRouter } from './routers/category';
 const app = express();
 const PORT = 3000;
 
@@ -34,6 +35,10 @@ function verifyUser(req:CustomRequest,res:express.Response,next:express.NextFunc
     return res.status(400).send('invalid token')
   }
 }
+
+
+app.use('/gift',giftRouter);
+app.use('/category', categoryRouter);
 
 Prisma.$connect()
   .then((ok) => {
