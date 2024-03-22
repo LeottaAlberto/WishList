@@ -30,17 +30,4 @@ authRouter.post("/register", async (req, res) => {
     
   });
 
-  authRouter.post("/edit/:id", async (req, res) => {
-    const body = req.body;
-    const id = req.params.id;
-    try {
-      const token= await editUser(id,body)
-      res.json(token);
-    } catch (error) {
-      res.status(413).send('wrong authorization')
-    }
-    console.log("User created succesfully");
-    
-  });
-
   export default authRouter

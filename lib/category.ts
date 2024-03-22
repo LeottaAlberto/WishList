@@ -1,4 +1,4 @@
-import { Prisma } from "../src/db";
+import { Prisma } from "./db";
 
 
 export async function createCategory(category: {user: string, name: string}){

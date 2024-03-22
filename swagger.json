@@ -1,0 +1,239 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Prisma.Without_Prisma.UserCreateInput.Prisma.UserUncheckedCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.UserUncheckedCreateInput": {
+				"properties": {
+					"gender": {
+						"type": "string"
+					},
+					"dateBirth": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"password": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"gender",
+					"dateBirth",
+					"password",
+					"username",
+					"email"
+				],
+				"type": "object"
+			},
+			"Prisma.Without_Prisma.UserUncheckedCreateInput.Prisma.UserCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.UserCreateInput": {
+				"properties": {
+					"gender": {
+						"type": "string"
+					},
+					"dateBirth": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"password": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"gender",
+					"dateBirth",
+					"password",
+					"username",
+					"email"
+				],
+				"type": "object"
+			},
+			"Prisma.XOR_Prisma.UserCreateInput.Prisma.UserUncheckedCreateInput_": {
+				"anyOf": [
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.UserCreateInput.Prisma.UserUncheckedCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.UserUncheckedCreateInput"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.UserUncheckedCreateInput.Prisma.UserCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.UserCreateInput"
+							}
+						]
+					}
+				],
+				"description": "XOR is needed to have a real mutually exclusive union type\nhttps://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types"
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "wishlist",
+		"version": "0.0.0",
+		"description": "progetto PCTO 2024",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Alberto Leotta, Luigi Matteu, Giuseppe Maugeri, Sebastiano Pettinato"
+		}
+	},
+	"paths": {
+		"/auth/login": {
+			"post": {
+				"operationId": "LoginUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"error": {},
+												"token": {}
+											},
+											"required": [
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"token": {},
+												"error": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"password": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"password",
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "RegisterUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {}
+									},
+									"required": [
+										"token"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Prisma.XOR_Prisma.UserCreateInput.Prisma.UserUncheckedCreateInput_"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

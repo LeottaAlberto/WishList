@@ -1,5 +1,5 @@
 import { Prisma as PrismaSchema } from "@prisma/client";
-import { Prisma } from "../src/db";
+import { Prisma } from "./db";
 import jwt from "jsonwebtoken"
 import { CONST_VALUES } from "../config";
 

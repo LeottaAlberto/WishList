@@ -1,4 +1,4 @@
-import { Prisma } from "../src/db";
+import { Prisma } from "../lib/db";
 
 
 export async function modGift(id: string, gift: {name: string, category: string, priority: string, description: string}) {
