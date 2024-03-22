@@ -16,7 +16,28 @@
                 "${workspaceFolder}/**/*.js"
             ],
             "runtimeVersion": "20.11.1",
-            "runtimeArgs": ["-r","ts-node/register","./main.ts"]
+            "runtimeArgs": ["-r","ts-node/register"],
+            "env":{
+                "DATABASE_URL": "mongodb+srv://leottaalberto43:2CwD4BX6BtdGEeXN@pctodb.ijdpldo.mongodb.net/pcto_wish_db"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "dbDebug",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\dbDebugger.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "runtimeVersion": "20.11.1",
+            "runtimeArgs": ["-r","ts-node/register"],
+            "env":{
+                "DATABASE_URL": "mongodb+srv://leottaalberto43:2CwD4BX6BtdGEeXN@pctodb.ijdpldo.mongodb.net/pcto_wish_db"
+            }
         }
+        
     ]
 }

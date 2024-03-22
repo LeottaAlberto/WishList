@@ -1,36 +1,52 @@
-import express from 'express';
+import express from "express";
+import { Prisma } from "./src/db";
+import authRouter from "./routers/auth";
+import jwt from "jsonwebtoken"
+import { CustomRequest } from "./interfaces";
+import { CONST_VALUES } from "./config";
+import userRouter from "./routers/User";
 import { giftRouter } from './routers/gift';
 import { categoryRouter } from './routers/category';
 const app = express();
 const PORT = 3000;
 
-app.get('/', (req, res) => {
-    res.send("Hello World");
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
+app.use(express.json());
 
-app.use(express.json())
+app.use('/auth/',authRouter)
 
+app.use(verifyUser)
+app.use('/user/',userRouter)
 
-// async per le le funzioni asincrone e per fare le richieste al DB
-// app.post('/', async (req, res) => {
-//     const body=req.body
-//     res.send("");
+function verifyUser(req:CustomRequest,res:express.Response,next:express.NextFunction) {
+  // validate jwt 
+  const jwtToken=req.headers.authorization
+  if(!jwtToken) return res.status(401).send('token not provided')
+  try {
+    const user=jwt.verify(jwtToken,CONST_VALUES.jwt_secret)
+    if(typeof user==='string')return res.status(400).send('malformed token')
+  
+    req.user={id:user.id}
+    next()
+  } catch (error) {
+    return res.status(400).send('invalid token')
+  }
+}
 
-// });
-
-// async function verifyUser(req:any,res:express.Response,next:express.NextFunction){
-//     req.user="ciao"
-//     next()
-// }
-
-// validate request
-// app.use(verifyUser)
-// add to request the user document from db
 
 app.use('/gift',giftRouter);
 app.use('/category', categoryRouter);
 
-app.listen(PORT, "0.0.0.0", ()=>{
-    console.log('Server in ascolto sulla porta: ' + PORT);
-});
+Prisma.$connect()
+  .then((ok) => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log("Server in ascolto sulla porta: " + PORT);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
