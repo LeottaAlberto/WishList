@@ -12,7 +12,6 @@ export class AuthController extends Controller {
 
     @Post("login")
     public async loginUser(@Body() body: { email: string; password: string; } ) {
-
         try {
             const token = await login(body)
             return {token}
@@ -26,7 +25,7 @@ export class AuthController extends Controller {
     }
 
     @Post("register")
-    public async registerUser(@Body() body: PrismaSchema.UserCreateArgs["data"] ) {
+    public async registerUser(@Body() body: any ) {
         body.dateBirth = new Date(body.dateBirth)
     
         console.log(typeof(body.dateBirth));
