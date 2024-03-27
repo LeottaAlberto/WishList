@@ -1,21 +1,22 @@
 import { Prisma } from "./db";
+import { Prisma as PrismaSchema } from "@prisma/client";
 
-export async function createGift(gift: {name: string, userId: string, categoryId: string, priority: string, description: string}){
+
+export async function createGift(gift: PrismaSchema.GiftCreateArgs['data']){
     try {
         const newGift = await Prisma.gift.create({
             data: gift
         });
         return newGift.id;
     } catch (error) {
-        console.log(new Error('Couldn\'tcreate a gift: '), error);
+        console.log(new Error('Couldn\'t create a gift: '), error);
     }
     console.log("Gift Created Succesfully!");
 }
 
-export async function modGift(giftId:string, gift: {name?: string, categoryId?: string, priority?: string, description?: string}) {
+export async function modGift(giftId:string, gift: PrismaSchema.GiftCreateArgs['data']) {
     try {
         const mod = await Prisma.gift.update({
-    
             where:{
                 id: giftId,
             },
@@ -24,7 +25,7 @@ export async function modGift(giftId:string, gift: {name?: string, categoryId?: 
         console.log("Gift Modified Succesfully");
         return mod.id;
     } catch (error) {   
-        console.log(new Error('Couldn\'t create a gift: '), error);
+        console.log(new Error('Couldn\'t update a gift: '), error);
     }
 }
 

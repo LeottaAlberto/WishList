@@ -3,8 +3,6 @@ import * as CategoryLib from "../lib/category";
 
 export const categoryRouter = Router()
 
-
-
 // curl -X PATCH 'http://localhost:3000/category/65f1d31a76be04b0ac4cace9' -d '{"name":"changename"}' -H "Content-Type: application/json"
 categoryRouter.patch('/:categoryId', async (req:any,res)=>{
     try{
@@ -28,6 +26,7 @@ categoryRouter.post('/', async (req: any, res)=>{
         console.error(error);
     }
 });
+
 categoryRouter.delete('/:categoryId', async (req: any, res)=>{
     try {    
         const newCategory = await CategoryLib.deleteCategory(req.params.categoryId);

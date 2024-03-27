@@ -1,7 +1,8 @@
 import { Prisma } from "./db";
+import { Prisma as PrismaSchema } from "@prisma/client";
 
 
-export async function createCategory(category: {user: string, name: string}){
+export async function createCategory(category:PrismaSchema.CategoryCreateArgs["data"]){
     const newCategory = await Prisma.category.create({
         data: category
     });
@@ -9,7 +10,7 @@ export async function createCategory(category: {user: string, name: string}){
     return newCategory.id;
 }
 
-export async function modCategory(userId: string, categoryId: string, category:{user?: string, name?: string}) {
+export async function modCategory(userId: string, categoryId: string, category:PrismaSchema.CategoryCreateArgs["data"]) {
     const mod = await Prisma.category.update({
 
         where:{

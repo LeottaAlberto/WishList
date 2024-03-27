@@ -37,11 +37,7 @@ app.use(express.json());
 //   }
 // }
 
-
-
 RegisterRoutes(app)
-
-
 
 app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
     return res.send(
