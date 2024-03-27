@@ -6,7 +6,146 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.GiftUncheckedCreateInput": {
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"user": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"category",
+					"user"
+				],
+				"type": "object"
+			},
+			"Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.GiftCreateInput": {
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"user": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"category",
+					"user"
+				],
+				"type": "object"
+			},
+			"Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
+				"anyOf": [
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.GiftUncheckedCreateInput"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.GiftCreateInput"
+							}
+						]
+					}
+				],
+				"description": "XOR is needed to have a real mutually exclusive union type\nhttps://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types"
+			},
+			"Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.CategoryUncheckedCreateInput": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"user": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"user"
+				],
+				"type": "object"
+			},
+			"Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_": {
+				"properties": {},
+				"type": "object"
+			},
+			"Prisma.CategoryCreateInput": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"user": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"user"
+				],
+				"type": "object"
+			},
+			"Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
+				"anyOf": [
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.CategoryUncheckedCreateInput"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_"
+							},
+							{
+								"$ref": "#/components/schemas/Prisma.CategoryCreateInput"
+							}
+						]
+					}
+				],
+				"description": "XOR is needed to have a real mutually exclusive union type\nhttps://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types"
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -21,6 +160,154 @@
 		}
 	},
 	"paths": {
+		"/gift/create": {
+			"post": {
+				"operationId": "CreateGift",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/gift/edit/{giftId}": {
+			"patch": {
+				"operationId": "EditGift",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "giftId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/gift/delete/{giftId}": {
+			"delete": {
+				"operationId": "DeleteGift",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "giftId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/category/create": {
+			"post": {
+				"operationId": "CreateCategory",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/category/edit/{userId}": {
+			"patch": {
+				"operationId": "EditGift",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/category/delete/{categoryId}": {
+			"delete": {
+				"operationId": "DeleteCategory",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "categoryId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/auth/login": {
 			"post": {
 				"operationId": "LoginUser",

@@ -10,11 +10,11 @@ export async function createCategory(category:PrismaSchema.CategoryCreateArgs["d
     return newCategory.id;
 }
 
-export async function modCategory(userId: string, categoryId: string, category:PrismaSchema.CategoryCreateArgs["data"]) {
+export async function modCategory(userId: string, category:PrismaSchema.CategoryCreateArgs["data"]) {
     const mod = await Prisma.category.update({
 
         where:{
-            id: categoryId,
+            id: category.id,
             user: userId
         },
         data:category

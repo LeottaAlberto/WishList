@@ -16,15 +16,14 @@ export class CategoryController extends Controller {
         }
     }
 
-    @Patch("edit/{categoryId}")
+    @Patch("edit/{userId}")
     public async editGift(
         @Path() userId: string,
-        @Path() categoryId: string,
         @Body() body: PrismaSchema.CategoryCreateArgs["data"],
     ){
         try {
-            if (!body && !userId && !categoryId) throw new Error('no patch provided')
-            await categoryLib.modCategory(userId,categoryId, body);
+            if (!body && !userId) throw new Error('no patch provided')
+            await categoryLib.modCategory(userId, body);
             console.log({ ok: true })
         } catch (error) {
             console.log(error);

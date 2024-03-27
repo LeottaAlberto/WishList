@@ -8,9 +8,8 @@ categoryRouter.patch('/:categoryId', async (req:any,res)=>{
     try{
         const body=req.body;
         const userId = req.user.authorization;
-        const categoryId = req.params.categoryId;
         if(!body) throw new Error('no patch provided');
-        await CategoryLib.modCategory(userId, categoryId, body);
+        await CategoryLib.modCategory(userId, body);
         res.json({ok:true});
     } catch (error){
         return new Error('Category Modified Failed');
