@@ -22,14 +22,14 @@ export class AuthController extends Controller {
                 error:"username or password are incorecct!"
             }
         }
-
     }
 
     @Post("register")
     public async registerUser(@Body() body: any ) {
+        console.log(body);
         body.dateBirth = new Date(body.dateBirth)
     
-        console.log(typeof(body.dateBirth));
+        
         
         const checkUser = await Prisma.user.findFirst({
             where:{
