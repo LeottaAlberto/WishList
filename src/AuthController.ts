@@ -12,7 +12,6 @@ export class AuthController extends Controller {
 
     @Post("login")
     public async loginUser(@Body() body: { email: string; password: string; } ) {
-        console.log(1);
         
         try {
             const token = await login(body)
