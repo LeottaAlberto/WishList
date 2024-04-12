@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import { CONST_VALUES } from "../config";
 
 import bcrypt from 'bcrypt';
+import { TCreateUser } from "../interfaces";
 const saltRounds = 10;
 
 export async function login(user:{email: string, password: string}) {
@@ -30,7 +31,7 @@ export async function login(user:{email: string, password: string}) {
     return token
 }
 
-export async function register(user:PrismaSchema.UserCreateArgs["data"]) {
+export async function register(user:TCreateUser) {
     console.log('user is trying to register ');
     user.dateBirth=new Date(user.dateBirth)
     
@@ -53,7 +54,7 @@ export async function register(user:PrismaSchema.UserCreateArgs["data"]) {
     return token
 }
 
-export async function editUser(id:string,user:Omit<PrismaSchema.UserUpdateInput,"password">) {
+export async function editUser(id:string,user:Omit<TCreateUser,"password">) {
     const updatedUser = await Prisma.user.update({
         where: {
             id

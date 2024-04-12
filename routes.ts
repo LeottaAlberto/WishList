@@ -15,58 +15,23 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
+    "TCreateUser": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"gender":{"dataType":"string","required":true},"dateBirth":{"dataType":"datetime","required":true},"password":{"dataType":"string","required":true},"username":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.GiftUncheckedCreateInput": {
+    "TCreateCategory": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"dataType":"string","required":true},"user":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"user":{"dataType":"any","required":true},"id":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_": {
+    "TCreateGift": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.GiftCreateInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"dataType":"string","required":true},"user":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"intersection","subSchemas":[{"ref":"Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"},{"ref":"Prisma.GiftUncheckedCreateInput"}]},{"dataType":"intersection","subSchemas":[{"ref":"Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_"},{"ref":"Prisma.GiftCreateInput"}]}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.CategoryUncheckedCreateInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"user":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.CategoryCreateInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"user":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"intersection","subSchemas":[{"ref":"Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"},{"ref":"Prisma.CategoryUncheckedCreateInput"}]},{"dataType":"intersection","subSchemas":[{"ref":"Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_"},{"ref":"Prisma.CategoryCreateInput"}]}],"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string","required":true},"priority":{"dataType":"string","required":true},"category":{"ref":"TCreateCategory","required":true},"user":{"ref":"TCreateUser","required":true},"name":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
-const templateService = new ExpressTemplateService(models, {"noImplicitAdditionalProperties":"throw-on-extras"});
+const templateService = new ExpressTemplateService(models, {"noImplicitAdditionalProperties":"throw-on-extras","bodyCoercion":true});
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -81,7 +46,7 @@ export function RegisterRoutes(app: Router) {
 
             function GiftController_createGift(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"ref":"Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"},
+                    body: {"in":"body","name":"body","required":true,"ref":"TCreateGift"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -112,7 +77,7 @@ export function RegisterRoutes(app: Router) {
             function GiftController_editGift(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     giftId: {"in":"path","name":"giftId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"},
+                    body: {"in":"body","name":"body","required":true,"ref":"TCreateGift"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -172,7 +137,7 @@ export function RegisterRoutes(app: Router) {
 
             function CategoryController_createCategory(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"ref":"Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"},
+                    body: {"in":"body","name":"body","required":true,"ref":"TCreateCategory"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -203,7 +168,7 @@ export function RegisterRoutes(app: Router) {
             function CategoryController_editGift(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"},
+                    body: {"in":"body","name":"body","required":true,"ref":"TCreateCategory"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

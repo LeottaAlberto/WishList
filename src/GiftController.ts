@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Patch, Path, Post, Route } from "tsoa";
 import * as giftLib from "../lib/gift";
 import { Prisma as PrismaSchema } from "@prisma/client";
+import { TCreateGift } from "../interfaces";
 
 @Route("gift")
 export class GiftController extends Controller {
 
     @Post("create")
     public async createGift(
-        @Body() body: PrismaSchema.GiftCreateArgs["data"]) {
+        @Body() body: TCreateGift) {
         try {
             const newGift = await giftLib.createGift(body);
             console.log(({ ok: true, id: newGift }));
@@ -19,7 +20,7 @@ export class GiftController extends Controller {
     @Patch("edit/{giftId}")
     public async editGift(
         @Path() giftId: string,
-        @Body() body: PrismaSchema.GiftCreateArgs["data"],
+        @Body() body: TCreateGift,
     ){
         try {
             if (!body && !giftId) throw new Error('no patch provided')

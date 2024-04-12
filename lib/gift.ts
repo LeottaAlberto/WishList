@@ -1,11 +1,12 @@
+import { TCreateGift } from "../interfaces";
 import { Prisma } from "./db";
 import { Prisma as PrismaSchema } from "@prisma/client";
 
 
-export async function createGift(gift: PrismaSchema.GiftCreateArgs['data']){
+export async function createGift(gift: TCreateGift){
     try {
         const newGift = await Prisma.gift.create({
-            data: gift
+            data: gift as any
         });
         return newGift.id;
     } catch (error) {
@@ -14,13 +15,13 @@ export async function createGift(gift: PrismaSchema.GiftCreateArgs['data']){
     console.log("Gift Created Succesfully!");
 }
 
-export async function modGift(giftId:string, gift: PrismaSchema.GiftCreateArgs['data']) {
+export async function modGift(giftId:string, gift: TCreateGift) {
     try {
         const mod = await Prisma.gift.update({
             where:{
                 id: giftId,
             },
-            data:gift
+            data:gift as any
         });
         console.log("Gift Modified Succesfully");
         return mod.id;

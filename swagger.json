@@ -7,16 +7,22 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
-				"properties": {},
-				"type": "object"
-			},
-			"Prisma.GiftUncheckedCreateInput": {
+			"TCreateUser": {
 				"properties": {
-					"category": {
+					"gender": {
 						"type": "string"
 					},
-					"user": {
+					"dateBirth": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"password": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					},
 					"id": {
@@ -24,70 +30,20 @@
 					}
 				},
 				"required": [
-					"category",
-					"user"
+					"gender",
+					"dateBirth",
+					"password",
+					"username",
+					"email"
 				],
 				"type": "object"
 			},
-			"Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_": {
-				"properties": {},
-				"type": "object"
-			},
-			"Prisma.GiftCreateInput": {
-				"properties": {
-					"category": {
-						"type": "string"
-					},
-					"user": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"category",
-					"user"
-				],
-				"type": "object"
-			},
-			"Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_": {
-				"anyOf": [
-					{
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/Prisma.Without_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
-							},
-							{
-								"$ref": "#/components/schemas/Prisma.GiftUncheckedCreateInput"
-							}
-						]
-					},
-					{
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/Prisma.Without_Prisma.GiftUncheckedCreateInput.Prisma.GiftCreateInput_"
-							},
-							{
-								"$ref": "#/components/schemas/Prisma.GiftCreateInput"
-							}
-						]
-					}
-				],
-				"description": "XOR is needed to have a real mutually exclusive union type\nhttps://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types"
-			},
-			"Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
-				"properties": {},
-				"type": "object"
-			},
-			"Prisma.CategoryUncheckedCreateInput": {
+			"TCreateCategory": {
 				"properties": {
 					"name": {
 						"type": "string"
 					},
-					"user": {
-						"type": "string"
-					},
+					"user": {},
 					"id": {
 						"type": "string"
 					}
@@ -98,16 +54,21 @@
 				],
 				"type": "object"
 			},
-			"Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_": {
-				"properties": {},
-				"type": "object"
-			},
-			"Prisma.CategoryCreateInput": {
+			"TCreateGift": {
 				"properties": {
-					"name": {
+					"description": {
 						"type": "string"
 					},
+					"priority": {
+						"type": "string"
+					},
+					"category": {
+						"$ref": "#/components/schemas/TCreateCategory"
+					},
 					"user": {
+						"$ref": "#/components/schemas/TCreateUser"
+					},
+					"name": {
 						"type": "string"
 					},
 					"id": {
@@ -115,35 +76,13 @@
 					}
 				},
 				"required": [
-					"name",
-					"user"
+					"description",
+					"priority",
+					"category",
+					"user",
+					"name"
 				],
 				"type": "object"
-			},
-			"Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_": {
-				"anyOf": [
-					{
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/Prisma.Without_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
-							},
-							{
-								"$ref": "#/components/schemas/Prisma.CategoryUncheckedCreateInput"
-							}
-						]
-					},
-					{
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/Prisma.Without_Prisma.CategoryUncheckedCreateInput.Prisma.CategoryCreateInput_"
-							},
-							{
-								"$ref": "#/components/schemas/Prisma.CategoryCreateInput"
-							}
-						]
-					}
-				],
-				"description": "XOR is needed to have a real mutually exclusive union type\nhttps://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types"
 			}
 		},
 		"securitySchemes": {}
@@ -175,7 +114,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
+								"$ref": "#/components/schemas/TCreateGift"
 							}
 						}
 					}
@@ -206,7 +145,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Prisma.XOR_Prisma.GiftCreateInput.Prisma.GiftUncheckedCreateInput_"
+								"$ref": "#/components/schemas/TCreateGift"
 							}
 						}
 					}
@@ -249,7 +188,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
+								"$ref": "#/components/schemas/TCreateCategory"
 							}
 						}
 					}
@@ -280,7 +219,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Prisma.XOR_Prisma.CategoryCreateInput.Prisma.CategoryUncheckedCreateInput_"
+								"$ref": "#/components/schemas/TCreateCategory"
 							}
 						}
 					}
