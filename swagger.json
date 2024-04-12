@@ -173,6 +173,27 @@
 				]
 			}
 		},
+		"/gift/sendGit/{userId}": {
+			"post": {
+				"operationId": "SendGift",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/category/create": {
 			"post": {
 				"operationId": "CreateCategory",

@@ -43,4 +43,15 @@ export class GiftController extends Controller {
             console.log(error);
         }
     }
+
+    @Post("sendGit/{userId}")
+    public async sendGift(@Path() userId:string,){
+        try {
+            if (!userId) throw new Error('no id provided')
+            await giftLib.sendGift(userId);
+            console.log({ ok: true })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

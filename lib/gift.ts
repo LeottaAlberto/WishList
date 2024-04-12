@@ -6,7 +6,7 @@ import { Prisma as PrismaSchema } from "@prisma/client";
 export async function createGift(gift: TCreateGift){
     try {
         const newGift = await Prisma.gift.create({
-            data: gift as any
+            data: gift
         });
         return newGift.id;
     } catch (error) {
@@ -55,5 +55,19 @@ export async function deleteGift(id: string) {
     });
     console.log('Delete Succesfully');  
     // return deleteGift.id;
+}
+
+export async function sendGift(userId: string) {
+    const userList = await Prisma.gift.findMany({
+        where: {
+            user: {
+                id: userId
+            },
+        },
+    });
+    console.log(userList);
+    
+    console.log('Gifts Sended Succesfully');  
+    return userList;
 }
     

@@ -13,7 +13,7 @@ export type TCreateCategory = {
 export type TCreateGift = {
     id?: string
     name: string
-    user: TCreateUser
+    user: any
     category: TCreateCategory
     priority: string
     description: string
