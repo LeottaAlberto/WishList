@@ -11,12 +11,12 @@ export async function createCategory(category:TCreateCategory){
     return newCategory.id;
 }
 
-export async function modCategory(userId: string, category:Partial<TCreateCategory>) {
+export async function modCategory(userId: string, category: Partial<TCreateCategory>) {
     const mod = await Prisma.category.update({
 
         where:{
             id: category.id,
-            user: userId as any
+            userId: userId
         },
         data:category
     });
@@ -25,7 +25,7 @@ export async function modCategory(userId: string, category:Partial<TCreateCatego
     return mod.id;
 }
 
-/**
+/**s
  * 
  * @param id 
  */

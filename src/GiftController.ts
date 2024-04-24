@@ -10,6 +10,8 @@ export class GiftController extends Controller {
     public async createGift(
         @Body() body: TCreateGift) {
         try {
+            console.log(body);
+            
             const newGift = await giftLib.createGift(body);
             console.log(({ ok: true, id: newGift }));
         } catch (error) {
@@ -44,12 +46,13 @@ export class GiftController extends Controller {
         }
     }
 
-    @Post("sendGit/{userId}")
+    @Post("sendGift/{userId}")
     public async sendGift(@Path() userId:string,){
         try {
             if (!userId) throw new Error('no id provided')
-            await giftLib.sendGift(userId);
+            const gifts = await giftLib.sendGift(userId);
             console.log({ ok: true })
+            return {gifts};
         } catch (error) {
             console.log(error);
         }

@@ -6,18 +6,19 @@ export type CustomRequest = Request & { user?: { id: string } };
 
 export type TCreateCategory = {
     id?:string
-    user: any
+    userId: string
     name: string
 }
 
 export type TCreateGift = {
-    id?: string
+    // id?: string
     name: string
-    user: any
-    category: TCreateCategory
+    userId: string
+    category: string
     priority: string
     description: string
 }
+
 
 export type TCreateUser = {
     id?: string

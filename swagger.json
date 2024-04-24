@@ -7,6 +7,70 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"TCreateGift": {
+				"properties": {
+					"description": {
+						"type": "string"
+					},
+					"priority": {
+						"type": "string"
+					},
+					"category": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"description",
+					"priority",
+					"category",
+					"userId",
+					"name"
+				],
+				"type": "object"
+			},
+			"Error": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TCreateCategory": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"userId"
+				],
+				"type": "object"
+			},
 			"TCreateUser": {
 				"properties": {
 					"gender": {
@@ -35,52 +99,6 @@
 					"password",
 					"username",
 					"email"
-				],
-				"type": "object"
-			},
-			"TCreateCategory": {
-				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"user": {},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"name",
-					"user"
-				],
-				"type": "object"
-			},
-			"TCreateGift": {
-				"properties": {
-					"description": {
-						"type": "string"
-					},
-					"priority": {
-						"type": "string"
-					},
-					"category": {
-						"$ref": "#/components/schemas/TCreateCategory"
-					},
-					"user": {
-						"$ref": "#/components/schemas/TCreateUser"
-					},
-					"name": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"description",
-					"priority",
-					"category",
-					"user",
-					"name"
 				],
 				"type": "object"
 			}
@@ -173,12 +191,65 @@
 				]
 			}
 		},
-		"/gift/sendGit/{userId}": {
+		"/gift/sendGift/{userId}": {
 			"post": {
 				"operationId": "SendGift",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"gifts": {
+											"anyOf": [
+												{
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string"
+															},
+															"priority": {
+																"type": "string"
+															},
+															"categoryId": {
+																"type": "string"
+															},
+															"userId": {
+																"type": "string"
+															},
+															"name": {
+																"type": "string"
+															},
+															"id": {
+																"type": "string"
+															}
+														},
+														"required": [
+															"description",
+															"priority",
+															"categoryId",
+															"userId",
+															"name",
+															"id"
+														],
+														"type": "object"
+													},
+													"type": "array"
+												},
+												{
+													"$ref": "#/components/schemas/Error"
+												}
+											]
+										}
+									},
+									"required": [
+										"gifts"
+									],
+									"type": "object"
+								}
+							}
+						}
 					}
 				},
 				"security": [],
@@ -281,7 +352,26 @@
 										{
 											"properties": {
 												"error": {},
-												"token": {}
+												"token": {
+													"anyOf": [
+														{
+															"$ref": "#/components/schemas/Error"
+														},
+														{
+															"properties": {
+																"token": {},
+																"id": {
+																	"type": "string"
+																}
+															},
+															"required": [
+																"token",
+																"id"
+															],
+															"type": "object"
+														}
+													]
+												}
 											},
 											"required": [
 												"token"
@@ -342,10 +432,14 @@
 							"application/json": {
 								"schema": {
 									"properties": {
-										"token": {}
+										"token": {},
+										"id": {
+											"type": "string"
+										}
 									},
 									"required": [
-										"token"
+										"token",
+										"id"
 									],
 									"type": "object"
 								}
@@ -359,7 +453,9 @@
 					"required": true,
 					"content": {
 						"application/json": {
-							"schema": {}
+							"schema": {
+								"$ref": "#/components/schemas/TCreateUser"
+							}
 						}
 					}
 				}

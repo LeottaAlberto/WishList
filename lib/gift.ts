@@ -6,7 +6,7 @@ import { Prisma as PrismaSchema } from "@prisma/client";
 export async function createGift(gift: TCreateGift){
     try {
         const newGift = await Prisma.gift.create({
-            data: gift
+            data: gift as any
         });
         return newGift.id;
     } catch (error) {
@@ -15,13 +15,13 @@ export async function createGift(gift: TCreateGift){
     console.log("Gift Created Succesfully!");
 }
 
-export async function modGift(giftId:string, gift: TCreateGift) {
+export async function modGift(giftId:string, gift: {}) {
     try {
         const mod = await Prisma.gift.update({
             where:{
                 id: giftId,
             },
-            data:gift as any
+            data:gift
         });
         console.log("Gift Modified Succesfully");
         return mod.id;
@@ -53,21 +53,25 @@ export async function deleteGift(id: string) {
             id: id,
         },
     });
-    console.log('Delete Succesfully');  
+    console.log('Gifts Delete Succesfully');  
     // return deleteGift.id;
 }
 
 export async function sendGift(userId: string) {
     const userList = await Prisma.gift.findMany({
         where: {
-            user: {
-                id: userId
-            },
+            userId: userId
         },
     });
     console.log(userList);
     
-    console.log('Gifts Sended Succesfully');  
-    return userList;
+    if(userList !== null){
+        console.log('Gifts Sended Succesfully');  
+        return userList;
+    }
+    else {
+        return new Error('Error While Sending Gifts');
+    }
+    
 }
     

@@ -5,6 +5,7 @@ import { CONST_VALUES } from "../config";
 import { Prisma } from "../lib/db";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { TCreateUser } from "../interfaces";
 const saltRounds = 10;
 
 @Route("auth")
@@ -25,7 +26,7 @@ export class AuthController extends Controller {
     }
 
     @Post("register")
-    public async registerUser(@Body() body: any ) {
+    public async registerUser(@Body() body: TCreateUser ) {
         console.log(body);
         body.dateBirth = new Date(body.dateBirth)
     
@@ -39,17 +40,17 @@ export class AuthController extends Controller {
         
         if(checkUser) throw new Error('user ' + body.email+ ' already exist')
         
-        const cryptedpassword= await bcrypt.hash(body.password, saltRounds)
+        const cryptedpassword = await bcrypt.hash(body.password, saltRounds)
         
         body.password=cryptedpassword
         const newUser = await Prisma.user.create({
             data: body
         });
 
-        console.log(typeof(newUser.dateBirth));
+        const id = newUser.id;
         
         const token = jwt.sign({ _id: newUser.id }, CONST_VALUES.jwt_secret,{expiresIn:'365d'});
-        return {token}
+        return {id, token}
     }
 
 }

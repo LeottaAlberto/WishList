@@ -27,11 +27,12 @@ export async function login(user:{email: string, password: string}) {
     if(!checkUser) 
         throw new Error('user ' + user.email+ ' not found')
 
+    const id = checkUser.id;
     const token = jwt.sign({ _id: checkUser.id }, CONST_VALUES.jwt_secret);
-    return token
+    return {id, token}
 }
 
-export async function register(user:TCreateUser) {
+export async function register(user: TCreateUser) {
     console.log('user is trying to register ');
     user.dateBirth=new Date(user.dateBirth)
     
@@ -54,7 +55,7 @@ export async function register(user:TCreateUser) {
     return token
 }
 
-export async function editUser(id:string,user:Omit<TCreateUser,"password">) {
+export async function editUser(id:string, user:Omit<TCreateUser,"password">) {
     const updatedUser = await Prisma.user.update({
         where: {
             id
