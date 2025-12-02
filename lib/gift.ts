@@ -1,22 +1,34 @@
-import { TCreateGift } from "../interfaces";
+import { TCreateGift, TEditGift } from "../interfaces";
 import { Prisma } from "./db";
 import { Prisma as PrismaSchema } from "@prisma/client";
 
 
-export async function createGift(gift: TCreateGift){
+export async function createGift(gift: Omit<TCreateGift, "id">){
+    const data = {
+        name: gift.name,
+        userId: gift.userId,
+        categoryId: gift.categoryId,
+        priority: gift.priority,
+        description: gift.description,
+    }
+    
     try {
         const newGift = await Prisma.gift.create({
-            data: gift as any
+            data: data
         });
+        console.log("Gift Created Succesfully!");
         return newGift.id;
     } catch (error) {
         console.log(new Error('Couldn\'t create a gift: '), error);
+        return new Error();
     }
-    console.log("Gift Created Succesfully!");
 }
 
-export async function modGift(giftId:string, gift: {}) {
+export async function modGift(giftId:string, gift: Partial<TEditGift>) {
     try {
+        
+        
+
         const mod = await Prisma.gift.update({
             where:{
                 id: giftId,

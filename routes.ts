@@ -15,9 +15,19 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "Pick_TCreateGift.Exclude_keyofTCreateGift.id__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"userId":{"dataType":"string","required":true},"categoryId":{"dataType":"string","required":true},"priority":{"dataType":"string","required":true},"description":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_TCreateGift.id_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_TCreateGift.Exclude_keyofTCreateGift.id__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TCreateGift": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string","required":true},"priority":{"dataType":"string","required":true},"category":{"dataType":"string","required":true},"userId":{"dataType":"string","required":true},"name":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string","required":true},"priority":{"dataType":"string","required":true},"categoryId":{"dataType":"string","required":true},"userId":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"id":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Error": {
@@ -56,7 +66,7 @@ export function RegisterRoutes(app: Router) {
 
             function GiftController_createGift(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"ref":"TCreateGift"},
+                    body: {"in":"body","name":"body","required":true,"ref":"Omit_TCreateGift.id_"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

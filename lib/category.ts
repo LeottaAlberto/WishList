@@ -3,9 +3,13 @@ import { Prisma } from "./db";
 import { Prisma as PrismaSchema } from "@prisma/client";
 
 
-export async function createCategory(category:TCreateCategory){
+export async function createCategory(category:Omit<TCreateCategory, 'id'>){
+    const data = {
+        userId: category.userId,
+        name: category.name
+    }
     const newCategory = await Prisma.category.create({
-        data: category
+        data: data
     });
     console.log("Category Created Succesflully!");
     return newCategory.id;

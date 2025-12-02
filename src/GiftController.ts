@@ -8,7 +8,7 @@ export class GiftController extends Controller {
 
     @Post("create")
     public async createGift(
-        @Body() body: TCreateGift) {
+        @Body() body: Omit<TCreateGift, "id">) {
         try {
             console.log(body);
             
